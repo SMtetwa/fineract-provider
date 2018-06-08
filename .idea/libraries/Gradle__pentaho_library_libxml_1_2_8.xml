@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: pentaho-library:libxml:1.2.8">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-library/libxml/1.2.8/60a57221b2f5b3ac5e8822bf14001640738a6ab/libxml-1.2.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-library/libxml/1.2.8/4e60adb8b0543296f5473161718afe63a05e1424/libxml-1.2.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

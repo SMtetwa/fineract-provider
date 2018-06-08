@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: pentaho-library:libformula:1.2.8">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-library/libformula/1.2.8/54f0bc121d9012734f022625ff53de000d774a3e/libformula-1.2.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-library/libformula/1.2.8/6c4924e4654d8c52cbbf266db87b394cea5839ee/libformula-1.2.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

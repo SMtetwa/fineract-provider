@@ -1,0 +1,9 @@
+
+squid:S2629W"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(¹°·©úÿÿÿÿ8½§ƒÿ¼,
+squid:S2629b"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(öÑ¨¼ûÿÿÿÿ8½§ƒÿ¼,
+vsquid:ModifiersOrderCheck2"EReorder the modifiers to comply with the Java Language Specification.(«û‹ÿşÿÿÿÿ8½§ƒÿ¼,
+rsquid:S1192?"ODefine a constant instead of duplicating this literal "file.separator" 9 times.(ø¡æñûÿÿÿÿ8½§ƒÿ¼,
+qsquid:S1192@"NDefine a constant instead of duplicating this literal "community-app" 3 times.(Á­Òşÿÿÿÿ8½§ƒÿ¼,
+Psquid:S1135["2Complete the task associated to this TODO comment.(åÕáê8½§ƒÿ¼,
+dsquid:S3457W"AFormat specifiers should be used instead of string concatenation.(¹°·©úÿÿÿÿ8½§ƒÿ¼,
+dsquid:S3457b"AFormat specifiers should be used instead of string concatenation.(öÑ¨¼ûÿÿÿÿ8½§ƒÿ¼,

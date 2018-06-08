@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: pentaho-reporting-engine:pentaho-reporting-engine-classic-extensions-scripting:3.9.1-GA">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-reporting-engine/pentaho-reporting-engine-classic-extensions-scripting/3.9.1-GA/174cce581a247680f24404e9ed6ef1fbfb53ae29/pentaho-reporting-engine-classic-extensions-scripting-3.9.1-GA.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-reporting-engine/pentaho-reporting-engine-classic-extensions-scripting/3.9.1-GA/92cb4720537cb96991d35d555d1e17c99a002e7f/pentaho-reporting-engine-classic-extensions-scripting-3.9.1-GA-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

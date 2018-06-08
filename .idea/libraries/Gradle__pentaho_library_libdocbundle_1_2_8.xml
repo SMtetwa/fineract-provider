@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: pentaho-library:libdocbundle:1.2.8">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-library/libdocbundle/1.2.8/9bde3c7aa2154a08e6c7bfdfd6d35dc3b18d05aa/libdocbundle-1.2.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-library/libdocbundle/1.2.8/57d21a90487d95b8a808834abb7b84e2b2e3776d/libdocbundle-1.2.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

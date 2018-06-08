@@ -1,0 +1,13 @@
+
+gsquid:S3027ø"JPut single-quotes around '@' to use the faster "lastIndexOf(char)" method.(ÔÁäîøÿÿÿÿ
+°%squid:RedundantThrowsDeclarationCheckä"yRemove the declaration of thrown exception 'java.lang.ClassNotFoundException', as it cannot be thrown from method's body.(¯æ’ÿÿÿÿÿ
+isquid:ModifiersOrderCheckB"EReorder the modifiers to comply with the Java Language Specification.(•›µ@
+<squid:S1872ë"Use "isAssignableFrom" instead.(®µ¯¡ùÿÿÿÿ
+{squid:S1488¢"^Immediately return this expression instead of assigning it to the temporary variable "JobKey".(ÖÈ·²şÿÿÿÿ
+osquid:S3776À"RRefactor this method to reduce its Cognitive Complexity from 40 to the 15 allowed.(‚Œ½ùÿÿÿÿ
+_squid:S00112£"FDefine and throw a dedicated exception instead of using a generic one.(ŸŒ×
+dsquid:S00112Ó"FDefine and throw a dedicated exception instead of using a generic one.(…®¡·ùÿÿÿÿ
+=squid:S1181¯"%Catch Exception instead of Throwable.(æŞ£Ö
+=squid:S1181"%Catch Exception instead of Throwable.(æŞ£Ö
+osquid:S00117¢"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÖÈ·²şÿÿÿÿ
+|squid:S1149”"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(éÎƒìşÿÿÿÿ

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: pentaho-library:libformat:1.2.8">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-library/libformat/1.2.8/3fd10ea2e18845e80c0fd506265d8ab904f90bbe/libformat-1.2.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-library/libformat/1.2.8/4a769b1b0c60e01d8cbecb2325a5d641b10678d9/libformat-1.2.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

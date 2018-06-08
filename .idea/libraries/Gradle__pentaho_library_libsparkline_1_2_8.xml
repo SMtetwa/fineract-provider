@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: pentaho-library:libsparkline:1.2.8">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-library/libsparkline/1.2.8/8cc1e0c6b5ae6fa44f0a40c8518d2346ae3f1f3f/libsparkline-1.2.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-library/libsparkline/1.2.8/12f563c76a4a49744f68755e9ecdce2c57ba8b7f/libsparkline-1.2.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

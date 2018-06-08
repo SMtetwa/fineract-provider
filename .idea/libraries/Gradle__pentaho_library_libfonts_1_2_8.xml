@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: pentaho-library:libfonts:1.2.8">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-library/libfonts/1.2.8/8d20d16c7b4022480df8fb8aa7c51f6357ff1817/libfonts-1.2.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-library/libfonts/1.2.8/db50012c19cb4da852f0d5b36d139a905fcf0b8a/libfonts-1.2.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

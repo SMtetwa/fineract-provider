@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: pentaho-library:librepository:1.2.8">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-library/librepository/1.2.8/6e30182126a8bf1c5807c18b020b277789ad25b4/librepository-1.2.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pentaho-library/librepository/1.2.8/7f9eaa64c9b963d1daf1de69eda3712c210f7e0b/librepository-1.2.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

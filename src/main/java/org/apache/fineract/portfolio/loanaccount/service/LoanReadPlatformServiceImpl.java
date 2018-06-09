@@ -128,6 +128,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+@SuppressWarnings({"Duplicates", "unused"})
 @Service
 public class LoanReadPlatformServiceImpl implements LoanReadPlatformService {
 

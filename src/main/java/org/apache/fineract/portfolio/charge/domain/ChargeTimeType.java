@@ -37,7 +37,8 @@ public enum ChargeTimeType {
     SHARE_PURCHASE(14, "chargeTimeType.sharespurchase"), 
     SHARE_REDEEM(15, "chargeTimeType.sharesredeem"),
     
-    SAVINGS_NOACTIVITY_FEE(16,"chargeTimeType.savingsNoActivityFee");
+    SAVINGS_NOACTIVITY_FEE(16,"chargeTimeType.savingsNoActivityFee"),
+    OVERDUE_ON_MATURITY(17, "chargeTimeType.overdueOnMaturity");
 
     private final Integer value;
     private final String code;
@@ -63,7 +64,7 @@ public enum ChargeTimeType {
 
     public static Object[] validLoanChargeValues() {
         return new Integer[] { ChargeTimeType.DISBURSEMENT.getValue(), ChargeTimeType.SPECIFIED_DUE_DATE.getValue(),
-                ChargeTimeType.INSTALMENT_FEE.getValue() };
+                ChargeTimeType.INSTALMENT_FEE.getValue(), ChargeTimeType.OVERDUE_ON_MATURITY.getValue() };
     }
 
     public static Object[] validSavingsValues() {
@@ -132,6 +133,9 @@ public enum ChargeTimeType {
                 break;
                 case 16:
                 	chargeTimeType = SAVINGS_NOACTIVITY_FEE;
+                	break;
+                case 17:
+                    chargeTimeType = OVERDUE_ON_MATURITY;
                 break;
                 default:
                     chargeTimeType = INVALID;
@@ -216,5 +220,9 @@ public enum ChargeTimeType {
 
     public boolean isSharesRedeem() {
         return this.value.equals(ChargeTimeType.SHARE_REDEEM.getValue());
+    }
+
+    public boolean isOverdueMaturity(){
+        return this.value.equals(ChargeTimeType.OVERDUE_ON_MATURITY.getValue());
     }
 }

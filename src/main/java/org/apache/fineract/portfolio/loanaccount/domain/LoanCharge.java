@@ -54,7 +54,7 @@ import org.apache.fineract.portfolio.charge.exception.LoanChargeWithoutMandatory
 import org.apache.fineract.portfolio.loanaccount.command.LoanChargeCommand;
 import org.apache.fineract.portfolio.loanaccount.data.LoanChargePaidDetail;
 import org.joda.time.LocalDate;
-
+@SuppressWarnings("Duplicates")
 @Entity
 @Table(name = "m_loan_charge")
 public class LoanCharge extends AbstractPersistableCustom<Long> {

@@ -24,6 +24,8 @@ import net.fortuna.ical4j.model.property.RRule;
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.LocalDate;
 import org.quartz.CronExpression;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.ObjectUtils;
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -43,6 +45,9 @@ public class DataValidatorBuilder {
     private Integer arrayIndex;
     private Object value;
     private boolean ignoreNullValue = false;
+
+
+    private static final Logger logger = LoggerFactory.getLogger(DataValidatorBuilder.class);
 
     public DataValidatorBuilder(final List<ApiParameterError> dataValidationErrors) {
         this.dataValidationErrors = dataValidationErrors;
@@ -239,7 +244,7 @@ public class DataValidatorBuilder {
 
     public DataValidatorBuilder isOneOfTheseValues(final Object... values) {
         if (this.value == null && this.ignoreNullValue) { return this; }
-
+        logger.info("DataValidatorBuilder isOneOfTheseValues Object {}", values);
         final List<Object> valuesList = Arrays.asList(values);
         final String valuesListStr = StringUtils.join(valuesList, ", ");
 
@@ -259,6 +264,7 @@ public class DataValidatorBuilder {
     }
 
     public DataValidatorBuilder isOneOfTheseStringValues(final Object... values) {
+        logger.info("DataValidatorBuilder isOneOfTheseStringValues Object {}", values);
         if (this.value == null && this.ignoreNullValue) { return this; }
 
         final List<Object> valuesList = Arrays.asList(values);
@@ -280,6 +286,7 @@ public class DataValidatorBuilder {
     }
 
     public DataValidatorBuilder isOneOfTheseStringValues(final List<String> valuesList) {
+        logger.info("DataValidatorBuilder isOneOfTheseStringValues String List {}", valuesList);
         if (this.value == null && this.ignoreNullValue) { return this; }
 
         final String valuesListStr = StringUtils.join(valuesList, ", ");
@@ -300,6 +307,7 @@ public class DataValidatorBuilder {
     }
 
     public DataValidatorBuilder isNotOneOfTheseValues(final Object... values) {
+        logger.info("DataValidatorBuilder isNotOneOfTheseValues Object {}", values);
         if (this.value == null && this.ignoreNullValue) { return this; }
 
         if (this.value != null) {

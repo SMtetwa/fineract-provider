@@ -45,6 +45,8 @@ import org.apache.fineract.infrastructure.core.serialization.DefaultToApiJsonSer
 import org.apache.fineract.infrastructure.security.service.PlatformSecurityContext;
 import org.apache.fineract.portfolio.charge.data.ChargeData;
 import org.apache.fineract.portfolio.charge.service.ChargeReadPlatformService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -61,6 +63,8 @@ public class ChargesApiResource {
             "clientChargeTimeTypeOptions"));
 
     private final String resourceNameForPermissions = "CHARGE";
+
+    private static final Logger logger = LoggerFactory.getLogger(ChargesApiResource.class);
 
     private final PlatformSecurityContext context;
     private final ChargeReadPlatformService readPlatformService;
@@ -97,7 +101,6 @@ public class ChargesApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     public String retrieveCharge(@PathParam("chargeId") final Long chargeId, @Context final UriInfo uriInfo) {
-
         this.context.authenticatedUser().validateHasReadPermission(this.resourceNameForPermissions);
 
         final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
@@ -129,7 +132,7 @@ public class ChargesApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     public String createCharge(final String apiRequestBodyAsJson) {
-
+        logger.info("Creating charge {}", apiRequestBodyAsJson);
         final CommandWrapper commandRequest = new CommandWrapperBuilder().createCharge().withJson(apiRequestBodyAsJson).build();
 
         final CommandProcessingResult result = this.commandsSourceWritePlatformService.logCommandSource(commandRequest);
@@ -142,7 +145,7 @@ public class ChargesApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     public String updateCharge(@PathParam("chargeId") final Long chargeId, final String apiRequestBodyAsJson) {
-
+        logger.info("Updating Charge chargeId {} : JSON {}", chargeId, apiRequestBodyAsJson);
         final CommandWrapper commandRequest = new CommandWrapperBuilder().updateCharge(chargeId).withJson(apiRequestBodyAsJson).build();
 
         final CommandProcessingResult result = this.commandsSourceWritePlatformService.logCommandSource(commandRequest);

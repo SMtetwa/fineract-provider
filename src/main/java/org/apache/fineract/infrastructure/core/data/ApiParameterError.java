@@ -150,4 +150,17 @@ public class ApiParameterError {
     public void setArgs(final List<ApiErrorMessageArg> args) {
         this.args = args;
     }
+
+    @Override
+    public String toString() {
+        return "ApiParameterError{" +
+                "developerMessage='" + developerMessage + '\'' +
+                ", defaultUserMessage='" + defaultUserMessage + '\'' +
+                ", userMessageGlobalisationCode='" + userMessageGlobalisationCode + '\'' +
+                ", parameterName='" + parameterName + '\'' +
+                ", value=" + value +
+                ", args=" + args +
+                ", dateFormatter=" + dateFormatter +
+                '}';
+    }
 }

@@ -18,6 +18,9 @@
  */
 package org.apache.fineract.portfolio.charge.domain;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public enum ChargeCalculationType {
 
     INVALID(0, "chargeCalculationType.invalid"), //
@@ -30,6 +33,8 @@ public enum ChargeCalculationType {
 
     private final Integer value;
     private final String code;
+
+    private static final Logger logger = LoggerFactory.getLogger(ChargeCalculationType.class);
 
     private ChargeCalculationType(final Integer value, final String code) {
         this.value = value;
@@ -72,6 +77,7 @@ public enum ChargeCalculationType {
     }
 
     public static ChargeCalculationType fromInt(final Integer chargeCalculation) {
+        logger.info("ChargeCalculationType fromInt() : Value {}", chargeCalculation);
         ChargeCalculationType chargeCalculationType = ChargeCalculationType.INVALID;
         switch (chargeCalculation) {
             case 1:
@@ -91,7 +97,7 @@ public enum ChargeCalculationType {
             	break;
             case 6:
                 chargeCalculationType = PERCENT_OF_OUTSTANDING_BALANCE;
-            break;
+                break;
         }
         return chargeCalculationType;
     }

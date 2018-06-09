@@ -118,11 +118,14 @@ public final class ChargeDefinitionCommandFromApiJsonDeserializer {
             }
 
             if (chargeCalculationType != null) {
+                logger.info("Fido ::: chargeCalculationType!=NULL ");
                 baseDataValidator.reset().parameter("chargeCalculationType").value(chargeCalculationType)
                         .isOneOfTheseValues(ChargeCalculationType.validValuesForLoan());
             }
 
             if (chargeTimeType != null && chargeCalculationType != null) {
+                logger.info("Fido :::: Performing ChargeTimeNCalculationTypeValidation");
+                logger.info("Charge Time Type {} :: ChargeCalculationType {}", chargeTimeType, chargeCalculationType);
                 performChargeTimeNCalculationTypeValidation(baseDataValidator, chargeTimeType, chargeCalculationType);
             }
 
@@ -308,7 +311,7 @@ public final class ChargeDefinitionCommandFromApiJsonDeserializer {
         if (this.fromApiJsonHelper.parameterExists("chargeCalculationType", element)) {
             final Integer chargeCalculationType = this.fromApiJsonHelper.extractIntegerNamed("chargeCalculationType", element,
                     Locale.getDefault());
-            baseDataValidator.reset().parameter("chargeCalculationType").value(chargeCalculationType).notNull().inMinMaxRange(1, 5);
+            baseDataValidator.reset().parameter("chargeCalculationType").value(chargeCalculationType).notNull().inMinMaxRange(1, 6);
         }
         
         if (this.fromApiJsonHelper.parameterExists("chargePaymentMode", element)) {
@@ -362,20 +365,32 @@ public final class ChargeDefinitionCommandFromApiJsonDeserializer {
     private void performChargeTimeNCalculationTypeValidation(DataValidatorBuilder baseDataValidator, final Integer chargeTimeType,
             final Integer chargeCalculationType) {
         if(chargeTimeType.equals(ChargeTimeType.SHAREACCOUNT_ACTIVATION.getValue())){
+            logger.info("Fido ::: ChargeTimeType is SHAREACCOUNT_ACTIVATION");
             baseDataValidator.reset().parameter("chargeCalculationType").value(chargeCalculationType)
             .isOneOfTheseValues(ChargeCalculationType.validValuesForShareAccountActivation());
         }
         
         if (chargeTimeType.equals(ChargeTimeType.TRANCHE_DISBURSEMENT.getValue())) {
+            logger.info("Fido ::: ChargeTimeType is TRANCHE_DISBURSEMENT");
             baseDataValidator.reset().parameter("chargeCalculationType").value(chargeCalculationType)
                     .isOneOfTheseValues(ChargeCalculationType.validValuesForTrancheDisbursement());
-        } else {
+        } else if (chargeCalculationType.equals(ChargeCalculationType.PERCENT_OF_OUTSTANDING_BALANCE.getValue())){
+            logger.info("Fido ::: Charge Calculation type is PERCENT_OF_OUTSTANDING_BALANCE");
+            //TODO
+            /*baseDataValidator.reset().parameter("chargeCalculationType").value(chargeCalculationType)
+                    .isOneOfTheseValues(ChargeCalculationType.PERCENT_OF_OUTSTANDING_BALANCE.getValue());
+*/
+            baseDataValidator.reset().parameter("chargeCalculationType").value(chargeCalculationType).notNull().inMinMaxRange(1, 6);
+            logger.info("Fido ::: BaseDataValidator {}", baseDataValidator.toString());
+        }else {
             baseDataValidator.reset().parameter("chargeCalculationType").value(chargeCalculationType)
                     .isNotOneOfTheseValues(ChargeCalculationType.PERCENT_OF_DISBURSEMENT_AMOUNT.getValue());
         }
     }
 
     private void throwExceptionIfValidationWarningsExist(final List<ApiParameterError> dataValidationErrors) {
+        logger.info("Fido ::: Validation Errors {} ", dataValidationErrors);
+        dataValidationErrors.forEach(System.out::println);
         if (!dataValidationErrors.isEmpty()) { throw new PlatformApiDataValidationException(dataValidationErrors); }
     }
 }

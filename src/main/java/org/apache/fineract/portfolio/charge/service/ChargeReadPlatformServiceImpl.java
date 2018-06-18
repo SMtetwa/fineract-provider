@@ -44,6 +44,8 @@ import org.apache.fineract.portfolio.common.service.DropdownReadPlatformService;
 import org.apache.fineract.portfolio.tax.data.TaxGroupData;
 import org.apache.fineract.portfolio.tax.service.TaxReadPlatformService;
 import org.joda.time.MonthDay;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -58,6 +60,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ChargeReadPlatformServiceImpl implements ChargeReadPlatformService {
+
+    private static final Logger log = LoggerFactory.getLogger(ChargeReadPlatformServiceImpl.class);
 
     private final JdbcTemplate jdbcTemplate;
     private final CurrencyReadPlatformService currencyReadPlatformService;
@@ -87,6 +91,7 @@ public class ChargeReadPlatformServiceImpl implements ChargeReadPlatformService 
     @Override
     @Cacheable(value = "charges", key = "T(org.apache.fineract.infrastructure.core.service.ThreadLocalContextUtil).getTenant().getTenantIdentifier().concat('ch')")
     public Collection<ChargeData> retrieveAllCharges() {
+        log.info("Retrieving all charges");
         final ChargeMapper rm = new ChargeMapper();
 
         String sql = "select " + rm.chargeSchema() + " where c.is_deleted=false ";
@@ -95,6 +100,7 @@ public class ChargeReadPlatformServiceImpl implements ChargeReadPlatformService 
 
         sql += " order by c.name ";
 
+        log.info("SQL {}", sql);
         return this.jdbcTemplate.query(sql, rm, new Object[] {});
     }
 
@@ -107,7 +113,8 @@ public class ChargeReadPlatformServiceImpl implements ChargeReadPlatformService 
         sql += addInClauseToSQL_toLimitChargesMappedToOffice_ifOfficeSpecificProductsEnabled();
 
         sql += " order by c.name ";
-
+        log.info("Retrieving all charges for currency");
+        log.info("SQL {}", sql);
         return this.jdbcTemplate.query(sql, rm, new Object[] {});
     }
 
@@ -121,6 +128,8 @@ public class ChargeReadPlatformServiceImpl implements ChargeReadPlatformService 
             sql += addInClauseToSQL_toLimitChargesMappedToOffice_ifOfficeSpecificProductsEnabled();
 
             sql = sql + " ;" ;
+            log.info("Retrieve charge");
+            log.info("SQL {}", sql);
             return this.jdbcTemplate.queryForObject(sql, rm, new Object[] { chargeId });
         } catch (final EmptyResultDataAccessException e) {
             throw new ChargeNotFoundException(chargeId);
@@ -166,7 +175,8 @@ public class ChargeReadPlatformServiceImpl implements ChargeReadPlatformService 
         String sql = "select " + rm.loanProductChargeSchema() + " where c.is_deleted=false and c.is_active=true and plc.product_loan_id=? ";
 
         sql += addInClauseToSQL_toLimitChargesMappedToOffice_ifOfficeSpecificProductsEnabled();
-
+        log.info("Retrieve Loan Product charges for Loan product {}", loanProductId);
+        log.info("SQL {}", sql);
         return this.jdbcTemplate.query(sql, rm, new Object[] { loanProductId });
     }
 
@@ -178,7 +188,8 @@ public class ChargeReadPlatformServiceImpl implements ChargeReadPlatformService 
         String sql = "select " + rm.loanProductChargeSchema()
                 + " where c.is_deleted=false and c.is_active=true and plc.product_loan_id=? and c.charge_time_enum=? ";
         sql += addInClauseToSQL_toLimitChargesMappedToOffice_ifOfficeSpecificProductsEnabled();
-
+        log.info("Retrieve Loan Product charges for Loan product {} && chargeTimeType {}", loanProductId, chargeTime);
+        log.info("SQL {}", sql);
         return this.jdbcTemplate.query(sql, rm, new Object[] { loanProductId, chargeTime.getValue() });
     }
 
@@ -190,7 +201,8 @@ public class ChargeReadPlatformServiceImpl implements ChargeReadPlatformService 
                 + " where c.is_deleted=false and c.is_active=true and c.is_penalty=false and c.charge_applies_to_enum=? ";
         sql += addInClauseToSQL_toLimitChargesMappedToOffice_ifOfficeSpecificProductsEnabled();
         sql += " order by c.name ";
-
+        log.info("Retrieve Loan applicable fees");
+        log.info("SQL {}", sql);
         return this.jdbcTemplate.query(sql, rm, params);
     }
 
@@ -206,6 +218,9 @@ public class ChargeReadPlatformServiceImpl implements ChargeReadPlatformService 
                 + " and c.is_deleted=false and c.is_active=true and c.charge_applies_to_enum=:chargeAppliesTo" + excludeClause + " ";
         sql += addInClauseToSQL_toLimitChargesMappedToOffice_ifOfficeSpecificProductsEnabled();
         sql += " order by c.name ";
+
+        log.info("Retrieve retrieveLoanAccountApplicableCharges {} ChargeTimeType {}", loanId, excludeChargeTimes);
+        log.info("SQL {}", sql);
         return this.namedParameterJdbcTemplate.query(sql, paramMap, rm);
     }
 
@@ -241,7 +256,8 @@ public class ChargeReadPlatformServiceImpl implements ChargeReadPlatformService 
                 + excludeClause + " ";
         sql += addInClauseToSQL_toLimitChargesMappedToOffice_ifOfficeSpecificProductsEnabled();
         sql += " order by c.name ";
-
+        log.info("Retrie LoanProductApplicableCharges");
+        log.info("SQL {}", sql);
         return this.namedParameterJdbcTemplate.query(sql, paramMap, rm);
     }
 
@@ -250,9 +266,20 @@ public class ChargeReadPlatformServiceImpl implements ChargeReadPlatformService 
         final ChargeMapper rm = new ChargeMapper();
 
         String sql = "select " + rm.chargeSchema()
-                + " where c.is_deleted=false and c.is_active=true and c.is_penalty=true and c.charge_applies_to_enum=? ";
+                + " where c.is_deleted=false and c.is_active=true and c.is_penalty=true and c.charge_applies_to_enum in (17, ?) ";
         sql += addInClauseToSQL_toLimitChargesMappedToOffice_ifOfficeSpecificProductsEnabled();
         sql += " order by c.name ";
+
+        //TODO ::FIDO FIDO
+        /**
+         *    String sql = "select " + rm.chargeSchema()
+         *                 + " where c.is_deleted=false and c.is_active=true and c.is_penalty=true and c.charge_applies_to_enum=? ";
+         *         sql += addInClauseToSQL_toLimitChargesMappedToOffice_ifOfficeSpecificProductsEnabled();
+         *         sql += " order by c.name ";
+         * */
+
+        log.info("Retrieve LoanApplicablePenalties");
+        log.info("SQL {}", sql);
         return this.jdbcTemplate.query(sql, rm, new Object[] { ChargeAppliesTo.LOAN.getValue() });
     }
 

@@ -1197,4 +1197,5 @@ public class LoanProductData {
     public BigDecimal getInterestRateDifferential() {
         return this.interestRateDifferential;
     }
+
 }

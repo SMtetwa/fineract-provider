@@ -35,6 +35,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.UriInfo;
 
 import org.apache.fineract.accounting.common.AccountingDropdownReadPlatformService;
@@ -70,6 +71,8 @@ import org.apache.fineract.portfolio.loanproduct.service.LoanDropdownReadPlatfor
 import org.apache.fineract.portfolio.loanproduct.service.LoanProductReadPlatformService;
 import org.apache.fineract.portfolio.paymenttype.data.PaymentTypeData;
 import org.apache.fineract.portfolio.paymenttype.service.PaymentTypeReadPlatformService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -78,6 +81,8 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope("singleton")
 public class LoanProductsApiResource {
+
+    private static final Logger log = LoggerFactory.getLogger(LoanProductsApiResource.class);
 
     private final Set<String> LOAN_PRODUCT_DATA_PARAMETERS = new HashSet<>(Arrays.asList("id", "name", "shortName", "description",
             "fundId", "fundName", "includeInBorrowerCycle", "currency", "principal", "minPrincipal", "maxPrincipal", "numberOfRepayments",
@@ -163,7 +168,7 @@ public class LoanProductsApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     public String retrieveAllLoanProducts(@Context final UriInfo uriInfo) {
-
+        log.info("FIDO ::: URL INFO {}", uriInfo);
         this.context.authenticatedUser().validateHasReadPermission(this.resourceNameForPermissions);
         final Set<String> associationParameters = ApiParameterHelper.extractAssociationsForResponseIfProvided(uriInfo.getQueryParameters());
         final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
@@ -186,7 +191,7 @@ public class LoanProductsApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     public String retrieveTemplate(@Context final UriInfo uriInfo, @QueryParam("isProductMixTemplate") final boolean isProductMixTemplate) {
-
+        log.info("FIDO ::: GET ::: Template URI INFO {}", uriInfo);
         this.context.authenticatedUser().validateHasReadPermission(this.resourceNameForPermissions);
         final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
 
@@ -209,7 +214,9 @@ public class LoanProductsApiResource {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     public String retrieveLoanProductDetails(@PathParam("productId") final Long productId, @Context final UriInfo uriInfo) {
-
+        log.info("FIDO ::: GET ::: ProductID {}", productId);
+        MultivaluedMap<String, String> queryParameters = uriInfo.getQueryParameters();
+        log.info("FIDO ::: UriInfo Query Params{}", queryParameters);
         this.context.authenticatedUser().validateHasReadPermission(this.resourceNameForPermissions);
 
         final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
@@ -221,6 +228,7 @@ public class LoanProductsApiResource {
         Collection<ChargeToGLAccountMapper> feeToGLAccountMappings = null;
         Collection<ChargeToGLAccountMapper> penaltyToGLAccountMappings = null;
         if (loanProduct.hasAccountingEnabled()) {
+            log.info("Loan has accounting enabled");
             accountingMappings = this.accountMappingReadPlatformService.fetchAccountMappingDetailsForLoanProduct(productId, loanProduct
                     .accountingRuleType().getId().intValue());
             paymentChannelToFundSourceMappings = this.accountMappingReadPlatformService
@@ -234,8 +242,10 @@ public class LoanProductsApiResource {
         }
 
         if (settings.isTemplate()) {
+            log.info("Loan is template");
             loanProduct = handleTemplate(loanProduct);
         }
+
         return this.toApiJsonSerializer.serialize(settings, loanProduct, this.LOAN_PRODUCT_DATA_PARAMETERS);
     }
 
@@ -256,13 +266,23 @@ public class LoanProductsApiResource {
     private LoanProductData handleTemplate(final LoanProductData productData) {
 
         Collection<ChargeData> chargeOptions = this.chargeReadPlatformService.retrieveLoanApplicableFees();
-        if (chargeOptions.isEmpty()) {
+        if (chargeOptions.isEmpty()) {//TODO ::::FIDO
             chargeOptions = null;
+            log.info("charge options not found ");
         }
+
+        log.info("charge options {}", chargeOptions);
+
 
         Collection<ChargeData> penaltyOptions = this.chargeReadPlatformService.retrieveLoanApplicablePenalties();
         if (penaltyOptions.isEmpty()) {
             penaltyOptions = null;
+            log.info("Penalty options are empty");
+        }
+
+        log.info("Penalty options {}", penaltyOptions);
+        for(ChargeData chargeData: chargeOptions){
+            System.out.println(chargeData.toString());
         }
 
         final Collection<CurrencyData> currencyOptions = this.currencyReadPlatformService.retrieveAllowedCurrencies();

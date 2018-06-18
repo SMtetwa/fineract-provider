@@ -95,6 +95,10 @@ public class ChargeEnumerations {
             	optionData = new EnumOptionData(ChargeTimeType.SAVINGS_NOACTIVITY_FEE.getValue().longValue(), ChargeTimeType.SAVINGS_NOACTIVITY_FEE.getCode(), 
             			"Saving No Activity Fee");
             break;
+            case OVERDUE_ON_MATURITY:
+                optionData = new EnumOptionData(ChargeTimeType.OVERDUE_ON_MATURITY.getValue().longValue(), ChargeTimeType.OVERDUE_ON_MATURITY.getCode(),
+                        "Overdue on Maturity");
+                break;
             default:
                 optionData = new EnumOptionData(ChargeTimeType.INVALID.getValue().longValue(), ChargeTimeType.INVALID.getCode(), "Invalid");
             break;
@@ -161,6 +165,7 @@ public class ChargeEnumerations {
                 optionData = new EnumOptionData(ChargeCalculationType.PERCENT_OF_OUTSTANDING_BALANCE.getValue().longValue(),
                         ChargeCalculationType.PERCENT_OF_OUTSTANDING_BALANCE.getCode(), "% Outstanding Balance");
                 break;
+
             default:
                 optionData = new EnumOptionData(ChargeCalculationType.INVALID.getValue().longValue(),
                         ChargeCalculationType.INVALID.getCode(), "Invalid");

@@ -377,9 +377,6 @@ public final class ChargeDefinitionCommandFromApiJsonDeserializer {
         } else if (chargeCalculationType.equals(ChargeCalculationType.PERCENT_OF_OUTSTANDING_BALANCE.getValue())){
             logger.info("Fido ::: Charge Calculation type is PERCENT_OF_OUTSTANDING_BALANCE");
             //TODO
-            /*baseDataValidator.reset().parameter("chargeCalculationType").value(chargeCalculationType)
-                    .isOneOfTheseValues(ChargeCalculationType.PERCENT_OF_OUTSTANDING_BALANCE.getValue());
-*/
             baseDataValidator.reset().parameter("chargeCalculationType").value(chargeCalculationType).notNull().inMinMaxRange(1, 6);
             logger.info("Fido ::: BaseDataValidator {}", baseDataValidator.toString());
         }else {

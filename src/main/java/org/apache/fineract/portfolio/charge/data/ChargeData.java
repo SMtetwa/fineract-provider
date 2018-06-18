@@ -308,4 +308,43 @@ public class ChargeData implements Comparable<ChargeData>, Serializable {
         }
         return isOverdueInstallmentCharge;
     }
+
+    @Override
+    public String toString() {
+        return "ChargeData{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", active=" + active +
+                ", penalty=" + penalty +
+                ", currency=" + currency +
+                ", amount=" + amount +
+                ", chargeTimeType=" + chargeTimeType +
+                ", chargeAppliesTo=" + chargeAppliesTo +
+                ", chargeCalculationType=" + chargeCalculationType +
+                ", chargePaymentMode=" + chargePaymentMode +
+                ", feeOnMonthDay=" + feeOnMonthDay +
+                ", feeInterval=" + feeInterval +
+                ", minCap=" + minCap +
+                ", maxCap=" + maxCap +
+                ", feeFrequency=" + feeFrequency +
+                ", incomeOrLiabilityAccount=" + incomeOrLiabilityAccount +
+                ", taxGroup=" + taxGroup +
+                ", currencyOptions=" + currencyOptions +
+                ", chargeCalculationTypeOptions=" + chargeCalculationTypeOptions +
+                ", chargeAppliesToOptions=" + chargeAppliesToOptions +
+                ", chargeTimeTypeOptions=" + chargeTimeTypeOptions +
+                ", chargePaymetModeOptions=" + chargePaymetModeOptions +
+                ", loanChargeCalculationTypeOptions=" + loanChargeCalculationTypeOptions +
+                ", loanChargeTimeTypeOptions=" + loanChargeTimeTypeOptions +
+                ", savingsChargeCalculationTypeOptions=" + savingsChargeCalculationTypeOptions +
+                ", savingsChargeTimeTypeOptions=" + savingsChargeTimeTypeOptions +
+                ", clientChargeCalculationTypeOptions=" + clientChargeCalculationTypeOptions +
+                ", clientChargeTimeTypeOptions=" + clientChargeTimeTypeOptions +
+                ", shareChargeCalculationTypeOptions=" + shareChargeCalculationTypeOptions +
+                ", shareChargeTimeTypeOptions=" + shareChargeTimeTypeOptions +
+                ", feeFrequencyOptions=" + feeFrequencyOptions +
+                ", incomeOrLiabilityAccountOptions=" + incomeOrLiabilityAccountOptions +
+                ", taxGroupOptions=" + taxGroupOptions +
+                '}';
+    }
 }

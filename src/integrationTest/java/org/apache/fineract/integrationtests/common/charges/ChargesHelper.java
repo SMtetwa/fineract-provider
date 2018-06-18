@@ -28,7 +28,7 @@ import com.google.gson.Gson;
 import com.jayway.restassured.specification.RequestSpecification;
 import com.jayway.restassured.specification.ResponseSpecification;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({ "rawtypes", "unchecked", "Duplicates" })
 public class ChargesHelper {
 
     private static final String CHARGES_URL = "/fineract-provider/api/v1/charges";
@@ -54,6 +54,7 @@ public class ChargesHelper {
     private static final Integer SHARE_REDEEM = 15 ;
     
     private static final Integer CHARGE_SAVINGS_NO_ACTIVITY_FEE = 16;
+    private static final Integer CHARGE_OVERDUE_ON_MATURITY = 17;
     
     private static final Integer CHARGE_CLIENT_SPECIFIED_DUE_DATE = 1;
 

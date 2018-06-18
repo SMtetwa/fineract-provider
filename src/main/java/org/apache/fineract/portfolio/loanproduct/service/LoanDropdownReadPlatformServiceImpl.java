@@ -54,12 +54,16 @@ import org.apache.fineract.portfolio.loanproduct.domain.LoanProductValueConditio
 import org.apache.fineract.portfolio.loanproduct.domain.LoanRescheduleStrategyMethod;
 import org.apache.fineract.portfolio.loanproduct.domain.LoanTransactionProcessingStrategy;
 import org.apache.fineract.portfolio.loanproduct.domain.RecalculationFrequencyType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LoanDropdownReadPlatformServiceImpl implements LoanDropdownReadPlatformService {
+
+    private static final Logger log = LoggerFactory.getLogger(LoanDropdownReadPlatformServiceImpl.class);
 
     private final LoanTransactionProcessingStrategyRepository loanTransactionProcessingStrategyRepository;
 
@@ -70,24 +74,28 @@ public class LoanDropdownReadPlatformServiceImpl implements LoanDropdownReadPlat
 
     @Override
     public List<EnumOptionData> retrieveLoanAmortizationTypeOptions() {
-
+        log.info("Retrieving retrieveLoanAmortizationTypeOptions");
         final List<EnumOptionData> allowedAmortizationMethods = Arrays.asList(amortizationType(AmortizationMethod.EQUAL_INSTALLMENTS),
                 amortizationType(AmortizationMethod.EQUAL_PRINCIPAL));
 
+
+        log.info("retrieveLoanAmortizationTypeOptions {}", allowedAmortizationMethods);
         return allowedAmortizationMethods;
     }
 
     @Override
     public List<EnumOptionData> retrieveLoanInterestTypeOptions() {
+        log.info("Retrieving retrieveLoanInterestTypeOptions");
         final List<EnumOptionData> allowedRepaymentScheduleCalculationMethods = Arrays.asList(interestType(InterestMethod.FLAT),
                 interestType(InterestMethod.DECLINING_BALANCE));
 
+        log.info("allowedRepaymentScheduleCalculationMethods {}", allowedRepaymentScheduleCalculationMethods);
         return allowedRepaymentScheduleCalculationMethods;
     }
 
     @Override
     public List<EnumOptionData> retrieveLoanInterestRateCalculatedInPeriodOptions() {
-
+        log.info("Retrieving retrieveLoanInterestRateCalculatedInPeriodOptions");
         final List<EnumOptionData> allowedOptions = Arrays.asList(interestCalculationPeriodType(InterestCalculationPeriodMethod.DAILY),
                 interestCalculationPeriodType(InterestCalculationPeriodMethod.SAME_AS_REPAYMENT_PERIOD));
 
@@ -96,6 +104,7 @@ public class LoanDropdownReadPlatformServiceImpl implements LoanDropdownReadPlat
 
     @Override
     public List<EnumOptionData> retrieveLoanTermFrequencyTypeOptions() {
+        log.info("Retrieving retrieveLoanTermFrequencyTypeOptions");
         final List<EnumOptionData> loanTermFrequencyOptions = Arrays.asList(loanTermFrequencyType(PeriodFrequencyType.DAYS),
                 loanTermFrequencyType(PeriodFrequencyType.WEEKS), loanTermFrequencyType(PeriodFrequencyType.MONTHS),
                 loanTermFrequencyType(PeriodFrequencyType.YEARS));
@@ -104,7 +113,7 @@ public class LoanDropdownReadPlatformServiceImpl implements LoanDropdownReadPlat
 
     @Override
     public List<EnumOptionData> retrieveRepaymentFrequencyTypeOptions() {
-
+        log.info("Retrieving retrieveRepaymentFrequencyTypeOptions");
         final List<EnumOptionData> repaymentFrequencyOptions = Arrays.asList(repaymentFrequencyType(PeriodFrequencyType.DAYS),
                 repaymentFrequencyType(PeriodFrequencyType.WEEKS), repaymentFrequencyType(PeriodFrequencyType.MONTHS));
         return repaymentFrequencyOptions;
@@ -120,7 +129,7 @@ public class LoanDropdownReadPlatformServiceImpl implements LoanDropdownReadPlat
 
     @Override
     public List<EnumOptionData> retrieveRepaymentFrequencyOptionsForDaysOfWeek() {
-
+        log.info("Retrieving retrieveRepaymentFrequencyOptionsForDaysOfWeek");
         final List<EnumOptionData> repaymentFrequencyOptions = Arrays.asList(repaymentFrequencyDayOfWeekType(DayOfWeekType.SUNDAY),
                 repaymentFrequencyDayOfWeekType(DayOfWeekType.MONDAY), repaymentFrequencyDayOfWeekType(DayOfWeekType.TUESDAY),
                 repaymentFrequencyDayOfWeekType(DayOfWeekType.WEDNESDAY), repaymentFrequencyDayOfWeekType(DayOfWeekType.THURSDAY),
@@ -130,6 +139,7 @@ public class LoanDropdownReadPlatformServiceImpl implements LoanDropdownReadPlat
 
     @Override
     public List<EnumOptionData> retrieveInterestRateFrequencyTypeOptions() {
+        log.info("Retrieving retrieveRepaymentFrequencyOptionsForDaysOfWeek");
         // support for monthly and annual percentage rate (MPR) and (APR)
         final List<EnumOptionData> interestRateFrequencyTypeOptions = Arrays.asList(interestRateFrequencyType(PeriodFrequencyType.MONTHS),
                 interestRateFrequencyType(PeriodFrequencyType.YEARS));
@@ -138,7 +148,7 @@ public class LoanDropdownReadPlatformServiceImpl implements LoanDropdownReadPlat
 
     @Override
     public Collection<TransactionProcessingStrategyData> retreiveTransactionProcessingStrategies() {
-
+        log.info("Retrieving retreiveTransactionProcessingStrategies");
         final Collection<TransactionProcessingStrategyData> strategyOptions = new ArrayList<>();
         Sort sort = new Sort("sortOrder");
         final List<LoanTransactionProcessingStrategy> strategies = this.loanTransactionProcessingStrategyRepository.findAll(sort);
@@ -151,7 +161,7 @@ public class LoanDropdownReadPlatformServiceImpl implements LoanDropdownReadPlat
 
     @Override
     public List<EnumOptionData> retrieveLoanCycleValueConditionTypeOptions() {
-
+        log.info("Retrieving retrieveLoanCycleValueConditionTypeOptions");
         final List<EnumOptionData> repaymentFrequencyOptions = Arrays.asList(
                 loanCycleValueConditionType(LoanProductValueConditionType.EQUAL),
                 loanCycleValueConditionType(LoanProductValueConditionType.GREATERTHAN));
@@ -160,7 +170,7 @@ public class LoanDropdownReadPlatformServiceImpl implements LoanDropdownReadPlat
 
     @Override
     public List<EnumOptionData> retrieveInterestRecalculationCompoundingTypeOptions() {
-
+        log.info("Retrieving retrieveInterestRecalculationCompoundingTypeOptions");
         final List<EnumOptionData> interestRecalculationCompoundingTypeOptions = Arrays.asList(
                 interestRecalculationCompoundingType(InterestRecalculationCompoundingMethod.NONE),
                 interestRecalculationCompoundingType(InterestRecalculationCompoundingMethod.FEE),
@@ -171,6 +181,7 @@ public class LoanDropdownReadPlatformServiceImpl implements LoanDropdownReadPlat
 
     @Override
     public List<EnumOptionData> retrieveInterestRecalculationNthDayTypeOptions() {
+        log.info("Retrieving retrieveInterestRecalculationNthDayTypeOptions");
         final List<EnumOptionData> interestRecalculationCompoundingNthDayTypeOptions = Arrays.asList(
                 interestRecalculationCompoundingNthDayType(NthDayType.ONE), interestRecalculationCompoundingNthDayType(NthDayType.TWO),
                 interestRecalculationCompoundingNthDayType(NthDayType.THREE), interestRecalculationCompoundingNthDayType(NthDayType.FOUR),
@@ -180,6 +191,7 @@ public class LoanDropdownReadPlatformServiceImpl implements LoanDropdownReadPlat
 
     @Override
     public List<EnumOptionData> retrieveInterestRecalculationDayOfWeekTypeOptions() {
+        log.info("Retrieving retrieveInterestRecalculationDayOfWeekTypeOptions");
         final List<EnumOptionData> interestRecalculationCompoundingNthDayTypeOptions = Arrays.asList(
                 interestRecalculationCompoundingDayOfWeekType(DayOfWeekType.SUNDAY),
                 interestRecalculationCompoundingDayOfWeekType(DayOfWeekType.MONDAY),
@@ -193,7 +205,7 @@ public class LoanDropdownReadPlatformServiceImpl implements LoanDropdownReadPlat
 
     @Override
     public List<EnumOptionData> retrieveRescheduleStrategyTypeOptions() {
-
+        log.info("Retrieving retrieveRescheduleStrategyTypeOptions");
         final List<EnumOptionData> rescheduleStrategyTypeOptions = Arrays.asList(
                 rescheduleStrategyType(LoanRescheduleStrategyMethod.REDUCE_EMI_AMOUNT),
                 rescheduleStrategyType(LoanRescheduleStrategyMethod.REDUCE_NUMBER_OF_INSTALLMENTS),
@@ -203,7 +215,7 @@ public class LoanDropdownReadPlatformServiceImpl implements LoanDropdownReadPlat
 
     @Override
     public List<EnumOptionData> retrieveInterestRecalculationFrequencyTypeOptions() {
-
+        log.info("Retrieving retrieveInterestRecalculationFrequencyTypeOptions");
         final List<EnumOptionData> interestRecalculationFrequencyTypeOptions = Arrays.asList(
                 interestRecalculationFrequencyType(RecalculationFrequencyType.SAME_AS_REPAYMENT_PERIOD),
                 interestRecalculationFrequencyType(RecalculationFrequencyType.DAILY),
@@ -214,7 +226,7 @@ public class LoanDropdownReadPlatformServiceImpl implements LoanDropdownReadPlat
 
     @Override
     public List<EnumOptionData> retrivePreCloseInterestCalculationStrategyOptions() {
-
+        log.info("Retrieving retrivePreCloseInterestCalculationStrategyOptions");
         final List<EnumOptionData> preCloseInterestCalculationStrategyOptions = Arrays.asList(
                 preCloseInterestCalculationStrategy(LoanPreClosureInterestCalculationStrategy.TILL_PRE_CLOSURE_DATE),
                 preCloseInterestCalculationStrategy(LoanPreClosureInterestCalculationStrategy.TILL_REST_FREQUENCY_DATE));

@@ -77,7 +77,6 @@ public enum ChargeCalculationType {
     }
 
     public static ChargeCalculationType fromInt(final Integer chargeCalculation) {
-        logger.info("ChargeCalculationType fromInt() : Value {}", chargeCalculation);
         ChargeCalculationType chargeCalculationType = ChargeCalculationType.INVALID;
         switch (chargeCalculation) {
             case 1:

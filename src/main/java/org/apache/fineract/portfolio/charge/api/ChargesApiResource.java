@@ -106,6 +106,7 @@ public class ChargesApiResource {
         final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
 
         ChargeData charge = this.readPlatformService.retrieveCharge(chargeId);
+
         if (settings.isTemplate()) {
             final ChargeData templateData = this.readPlatformService.retrieveNewChargeDetails();
             charge = ChargeData.withTemplate(charge, templateData);

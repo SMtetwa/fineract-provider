@@ -59,12 +59,13 @@ public enum ChargeTimeType {
     public static Object[] validLoanValues() {
         return new Integer[] { ChargeTimeType.DISBURSEMENT.getValue(), ChargeTimeType.SPECIFIED_DUE_DATE.getValue(),
                 ChargeTimeType.INSTALMENT_FEE.getValue(), ChargeTimeType.OVERDUE_INSTALLMENT.getValue(),
-                ChargeTimeType.TRANCHE_DISBURSEMENT.getValue() };
+                ChargeTimeType.TRANCHE_DISBURSEMENT.getValue(), ChargeTimeType.OVERDUE_ON_MATURITY.getValue() };
     }
 
     public static Object[] validLoanChargeValues() {
         return new Integer[] { ChargeTimeType.DISBURSEMENT.getValue(), ChargeTimeType.SPECIFIED_DUE_DATE.getValue(),
-                ChargeTimeType.INSTALMENT_FEE.getValue(), ChargeTimeType.OVERDUE_ON_MATURITY.getValue() };
+                ChargeTimeType.INSTALMENT_FEE.getValue(), ChargeTimeType.OVERDUE_ON_MATURITY.getValue()
+        ,ChargeTimeType.TRANCHE_DISBURSEMENT.getValue(), ChargeTimeType.OVERDUE_ON_MATURITY.getValue()};
     }
 
     public static Object[] validSavingsValues() {
@@ -190,7 +191,7 @@ public enum ChargeTimeType {
     }
 
     public boolean isAllowedLoanChargeTime() {
-        return isTimeOfDisbursement() || isOnSpecifiedDueDate() || isInstalmentFee() || isOverdueInstallment() || isTrancheDisbursement();
+        return isTimeOfDisbursement() || isOnSpecifiedDueDate() || isInstalmentFee() || isOverdueInstallment() || isTrancheDisbursement() || isOverdueMaturity();
     }
 
     public boolean isAllowedClientChargeTime() {
@@ -224,5 +225,13 @@ public enum ChargeTimeType {
 
     public boolean isOverdueMaturity(){
         return this.value.equals(ChargeTimeType.OVERDUE_ON_MATURITY.getValue());
+    }
+
+    @Override
+    public String toString() {
+        return "ChargeTimeType{" +
+                "value=" + value +
+                ", code='" + code + '\'' +
+                '}';
     }
 }

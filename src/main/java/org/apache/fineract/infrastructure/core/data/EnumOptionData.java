@@ -46,6 +46,13 @@ public class EnumOptionData {
     public String getValue() {
         return this.value;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "EnumOptionData{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }
